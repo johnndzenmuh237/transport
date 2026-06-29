@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — LuxeShop</title>
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+  <div class="announcement-bar">🚚 Free shipping on orders over $75 — <a href="shop.html">Shop Now</a></div>
+  <header class="site-header" id="siteHeader">
+    <div class="container"><div class="header-inner">
+      <a href="index.html" class="site-logo"><div class="logo-mark">✦</div><span class="logo-text">Luxe<span>Shop</span></span></a>
+      <nav class="main-nav"><ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="shop.html" class="nav-link">Shop <span style="font-size:0.7em">▾</span></a>
+          <div class="nav-dropdown"><a href="shop.html?cat=new">New Arrivals</a><a href="shop.html?cat=women">Women</a><a href="shop.html?cat=men">Men</a><a href="shop.html?cat=sale">Sale</a></div>
+        </li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+      </ul></nav>
+      <div class="header-actions">
+        <button class="header-icon-btn" onclick="openSearch()">⌕</button>
+        <a href="account.html" class="header-icon-btn" style="color:var(--clr-accent)">◉</a>
+        <a href="wishlist.html" class="header-icon-btn">♡<span class="badge-count" id="wishlistCount">3</span></a>
+        <button class="header-icon-btn" id="cartToggle">⊡<span class="badge-count" id="cartCount">0</span></button>
+        <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+      </div>
+    </div></div>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">My Account</span></nav>
+        <h1 class="page-hero-title">My Account</h1>
+      </div>
+    </div>
+
+    <section class="section--sm">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:240px 1fr;gap:var(--sp-10);align-items:start">
+
+          <!-- Account Sidebar -->
+          <aside>
+            <!-- Profile summary -->
+            <div style="background:var(--clr-panel);border:1px solid var(--clr-border);border-radius:var(--radius-xl);padding:var(--sp-6);text-align:center;margin-bottom:var(--sp-4)">
+              <div style="width:72px;height:72px;border-radius:50%;background:var(--clr-accent);margin:0 auto var(--sp-3);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:white;font-family:var(--font-display);font-weight:900">J</div>
+              <p style="font-weight:var(--weight-semibold);font-size:var(--text-base)">Jane Smith</p>
+              <p style="font-size:var(--text-xs);color:var(--clr-text-muted)">jane@example.com</p>
+              <p style="font-size:var(--text-xs);color:var(--clr-text-light);margin-top:var(--sp-1)">Member since Jan 2024</p>
+            </div>
+
+            <!-- Nav -->
+            <nav style="background:var(--clr-panel);border:1px solid var(--clr-border);border-radius:var(--radius-xl);overflow:hidden">
+              <ul>
+                <li><button class="mobile-nav-link active" style="width:100%;text-align:left;border-radius:0;padding:var(--sp-4) var(--sp-5)" onclick="switchAccountTab('orders',this)">📦 My Orders</button></li>
+                <li style="border-top:1px solid var(--clr-border)"><button class="mobile-nav-link" style="width:100%;text-align:left;border-radius:0;padding:var(--sp-4) var(--sp-5)" onclick="switchAccountTab('profile',this)">◉ Profile</button></li>
+                <li style="border-top:1px solid var(--clr-border)"><button class="mobile-nav-link" style="width:100%;text-align:left;border-radius:0;padding:var(--sp-4) var(--sp-5)" onclick="switchAccountTab('addresses',this)">📍 Addresses</button></li>
+                <li style="border-top:1px solid var(--clr-border)"><button class="mobile-nav-link" style="width:100%;text-align:left;border-radius:0;padding:var(--sp-4) var(--sp-5)" onclick="switchAccountTab('payment',this)">💳 Payment Methods</button></li>
+                <li style="border-top:1px solid var(--clr-border)"><a href="wishlist.html" class="mobile-nav-link" style="display:block;padding:var(--sp-4) var(--sp-5)">♡ Wishlist <span style="background:var(--clr-accent);color:white;font-size:10px;padding:2px 6px;border-radius:9999px;font-weight:700">3</span></a></li>
+                <li style="border-top:1px solid var(--clr-border)"><button class="mobile-nav-link" style="width:100%;text-align:left;border-radius:0;padding:var(--sp-4) var(--sp-5);color:var(--clr-error)" onclick="signOut()">↪ Sign Out</button></li>
+              </ul>
+            </nav>
+          </aside>
+
+          <!-- Account Content -->
+          <div>
+            <!-- Orders Tab -->
+            <div id="tab-orders">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-6)">
+                <h2 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700">My Orders</h2>
+                <div class="form-select-wrap"><select class="form-control" style="font-size:var(--text-sm);padding:0.5em 2.5em 0.5em 1em"><option>All Orders</option><option>Processing</option><option>Shipped</option><option>Delivered</option></select></div>
+              </div>
+
+              <!-- Order cards -->
+              <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+                <!-- Order 1 -->
+                <div style="background:var(--clr-panel);border:1px solid var(--clr-border);border-radius:var(--radius-xl);overflow:hidden">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) var(--sp-5);background:var(--clr-bg-alt);flex-wrap:wrap;gap:var(--sp-3)">
+                    <div style="display:flex;gap:var(--sp-8);flex-wrap:wrap">
+                      <div><div style="font-size:var(--text-xs);color:var(--clr-text-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Order</div><div style="font-weight:var(--weight-semibold);font-size:var(--text-sm)">#LX-2025-8472</div></div>
+                      <div><div style="font-size:var(--text-xs);color:var(--clr-text-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Placed</div><div style="font-weight:var(--weight-semibold);font-size:var(--text-sm)">Jun 15, 2025</div></div>
+                      <div><div style="font-size:var(--text-xs);color:var(--clr-text-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Total</div><div style="font-weight:var(--weight-semibold);font-size:var(--text-sm)">$445.00</div></div>
+                    </div>
+                    <span style="display:inline-flex;align-items:center;gap:var(--sp-1);padding:4px 12px;border-radius:9999px;font-size:var(--text-xs);font-weight:700;background:rgba(14,165,233,0.1);color:var(--clr-info)">⚡ Processing</span>
+                  </div>
+                  <div style="padding:var(--sp-4) var(--sp-5)">
+                    <div style="display:flex;gap:var(--sp-3);align-items:center;margin-bottom:var(--sp-4)">
+                      <div style="display:flex;gap:var(--sp-2)">
+                        <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:var(--clr-bg-alt);overflow:hidden"><img src="assets/images/products/blazer-main.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+                        <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:var(--clr-bg-alt);overflow:hidden"><img src="assets/images/products/tshirt-main.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+                        <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:var(--clr-bg-alt);overflow:hidden"><img src="assets/images/products/bag-main.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+                      </div>
+                      <span style="font-size:var(--text-sm);color:var(--clr-text-muted)">3 items</span>
+                    </div>
+                    <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">
+                      <button class="btn btn-outline btn-sm">View Order</button>
+                      <button class="btn btn-ghost btn-sm">Track Package</button>
+                      <button class="btn btn-ghost btn-sm">Cancel Order</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Order 2 -->
+                <div style="background:var(--clr-panel);border:1px solid var(--clr-border);border-radius:var(--radius-xl);overflow:hidden">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-4) var(--sp-5);background:var(--clr-bg-alt);flex-wrap:wrap;gap:var(--sp-3)">
+                    <div style="display:flex;gap:var(--sp-8);flex-wrap:wrap">
+                      <div><div style="font-size:var(--text-xs);color:var(--clr-text-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Order</div><div style="font-weight:var(--weight-semibold);font-size:var(--text-sm)">#LX-2025-7891</div></div>
+                      <div><div style="font-size:var(--text-xs);color:var(--clr-text-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Placed</div><div style="font-weight:var(--weight-semibold);font-size:var(--text-sm)">May 28, 2025</div></div>
+                      <div><div style="font-size:var(--text-xs);color:var(--clr-text-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px">Total</div><div style="font-weight:var(--weight-semibold);font-size:var(--text-sm)">$189.00</div></div>
+                    </div>
+                    <span style="display:inline-flex;align-items:center;gap:var(--sp-1);padding:4px 12px;border-radius:9999px;font-size:var(--text-xs);font-weight:700;background:rgba(44,182,125,0.1);color:var(--clr-success)">✓ Delivered</span>
+                  </div>
+                  <div style="padding:var(--sp-4) var(--sp-5)">
+                    <div style="display:flex;gap:var(--sp-3);align-items:center;margin-bottom:var(--sp-4)">
+                      <div style="width:48px;height:48px;border-radius:var(--radius-sm);background:var(--clr-bg-alt);overflow:hidden"><img src="assets/images/products/blazer-main.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+                      <span style="font-size:var(--text-sm);color:var(--clr-text-muted)">1 item</span>
+                    </div>
+                    <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap">
+                      <button class="btn btn-outline btn-sm">View Order</button>
+                      <button class="btn btn-ghost btn-sm">Leave Review</button>
+                      <button class="btn btn-ghost btn-sm">Reorder</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Tab (hidden) -->
+            <div id="tab-profile" style="display:none">
+              <h2 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;margin-bottom:var(--sp-6)">Profile Settings</h2>
+              <div style="background:var(--clr-panel);border:1px solid var(--clr-border);border-radius:var(--radius-xl);padding:var(--sp-8)">
+                <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label" for="pFirstName">First Name</label><input type="text" id="pFirstName" class="form-control" value="Jane"></div>
+                    <div class="form-group"><label class="form-label" for="pLastName">Last Name</label><input type="text" id="pLastName" class="form-control" value="Smith"></div>
+                  </div>
+                  <div class="form-group"><label class="form-label" for="pEmail">Email</label><input type="email" id="pEmail" class="form-control" value="jane@example.com"></div>
+                  <div class="form-group"><label class="form-label" for="pPhone">Phone</label><input type="tel" id="pPhone" class="form-control" value="+1 (555) 234-5678"></div>
+                  <div class="divider"></div>
+                  <h3 style="font-size:var(--text-lg);font-family:var(--font-display);font-weight:700">Change Password</h3>
+                  <div class="form-group"><label class="form-label" for="pCurrentPw">Current Password</label><input type="password" id="pCurrentPw" class="form-control" placeholder="••••••••"></div>
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label" for="pNewPw">New Password</label><input type="password" id="pNewPw" class="form-control" placeholder="••••••••"></div>
+                    <div class="form-group"><label class="form-label" for="pConfirmPw">Confirm Password</label><input type="password" id="pConfirmPw" class="form-control" placeholder="••••••••"></div>
+                  </div>
+                  <div style="display:flex;gap:var(--sp-3);margin-top:var(--sp-2)">
+                    <button class="btn btn-primary" onclick="showToast('Profile saved!','success')">Save Changes</button>
+                    <button class="btn btn-ghost">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Addresses Tab (hidden) -->
+            <div id="tab-addresses" style="display:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-6)">
+                <h2 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700">Saved Addresses</h2>
+                <button class="btn btn-primary btn-sm" onclick="showToast('Add address form coming soon')">+ Add Address</button>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4)">
+                <div style="background:var(--clr-panel);border:2px solid var(--clr-accent);border-radius:var(--radius-xl);padding:var(--sp-5);position:relative">
+                  <span style="position:absolute;top:var(--sp-3);right:var(--sp-3);font-size:10px;font-weight:700;background:var(--clr-accent);color:white;padding:2px 8px;border-radius:9999px">Default</span>
+                  <p style="font-weight:var(--weight-semibold);margin-bottom:var(--sp-1)">Jane Smith</p>
+                  <p style="font-size:var(--text-sm);color:var(--clr-text-muted);line-height:var(--leading-loose)">123 Main Street, Apt 4B<br>New York, NY 10001<br>United States</p>
+                  <div style="display:flex;gap:var(--sp-2);margin-top:var(--sp-4)">
+                    <button class="btn btn-outline btn-sm">Edit</button>
+                    <button class="btn btn-ghost btn-sm" style="color:var(--clr-error)">Delete</button>
+                  </div>
+                </div>
+                <div style="background:var(--clr-bg-alt);border:2px dashed var(--clr-border);border-radius:var(--radius-xl);padding:var(--sp-5);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:160px;cursor:pointer" onclick="showToast('Add address form coming soon')">
+                  <div style="font-size:1.5rem;color:var(--clr-text-light);margin-bottom:var(--sp-2)">+</div>
+                  <p style="font-size:var(--text-sm);color:var(--clr-text-muted);font-weight:var(--weight-medium)">Add New Address</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Tab (hidden) -->
+            <div id="tab-payment" style="display:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-6)">
+                <h2 style="font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700">Payment Methods</h2>
+                <button class="btn btn-primary btn-sm" onclick="showToast('Add card coming soon')">+ Add Card</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+                <div style="background:var(--clr-panel);border:1px solid var(--clr-border);border-radius:var(--radius-xl);padding:var(--sp-5);display:flex;align-items:center;gap:var(--sp-4)">
+                  <div style="font-size:2rem">💳</div>
+                  <div style="flex:1">
+                    <p style="font-weight:var(--weight-semibold)">Visa ending in 4242</p>
+                    <p style="font-size:var(--text-xs);color:var(--clr-text-muted)">Expires 09/2027 · <span style="color:var(--clr-success)">Default</span></p>
+                  </div>
+                  <div style="display:flex;gap:var(--sp-2)">
+                    <button class="btn btn-outline btn-sm">Edit</button>
+                    <button class="btn btn-ghost btn-sm" style="color:var(--clr-error)">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main"><div class="container"><div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo">✦ Luxe<span>Shop</span></a><p class="footer-desc">Curated fashion essentials.</p></div>
+      <div><h4 class="footer-heading">Shop</h4><ul class="footer-links"><li><a href="shop.html">All Products</a></li><li><a href="shop.html?cat=sale">Sale</a></li></ul></div>
+      <div><h4 class="footer-heading">Help</h4><ul class="footer-links"><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4 class="footer-heading">Legal</h4><ul class="footer-links"><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+    </div></div></div>
+    <div class="container"><div class="footer-bottom"><span>© 2025 LuxeShop</span></div></div>
+  </footer>
+
+  <div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header"><h2 class="drawer-title">Your Cart</h2><button class="drawer-close" onclick="closeCart()">✕</button></div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-footer"><div class="summary-row total"><span>Total</span><span id="drawerTotal">$0.00</span></div><a href="checkout.html" class="btn btn-primary" style="width:100%;margin-top:var(--sp-4)">Checkout</a></div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header"><a href="index.html" class="site-logo"><div class="logo-mark">✦</div><span>Luxe<span>Shop</span></span></a><button onclick="closeMobileNav()">✕</button></div>
+    <div class="mobile-nav-body"><ul class="mobile-nav-list"><li><a href="index.html" class="mobile-nav-link">Home</a></li><li><a href="shop.html" class="mobile-nav-link">Shop</a></li></ul></div>
+  </nav>
+  <div class="search-modal" id="searchModal">
+    <div class="search-modal-inner">
+      <div class="search-modal-input-wrap"><span class="search-modal-icon">⌕</span><input type="search" id="searchInput" placeholder="Search…"><button onclick="closeSearch()">✕</button></div>
+      <div id="searchResults" style="padding:var(--sp-4);color:var(--clr-text-muted);font-size:var(--text-sm)">Start typing…</div>
+    </div>
+  </div>
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    const ACCOUNT_TABS = ['orders','profile','addresses','payment'];
+    function switchAccountTab(name, btn) {
+      ACCOUNT_TABS.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        if (el) el.style.display = t === name ? '' : 'none';
+      });
+      document.querySelectorAll('aside nav button').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+    function signOut() { if (confirm('Sign out?')) window.location.href = 'login.html'; }
+  </script>
+</body>
+</html>

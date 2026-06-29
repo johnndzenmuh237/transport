@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — LuxeShop</title>
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <div class="auth-layout">
+    <!-- Left: Form Panel -->
+    <div class="auth-panel">
+      <a href="index.html" class="auth-logo">
+        <div class="logo-mark">✦</div>
+        Luxe<span>Shop</span>
+      </a>
+
+      <h1 class="auth-title">Welcome back</h1>
+      <p class="auth-subtitle">Sign in to your account to continue shopping.</p>
+
+      <!-- Social Login -->
+      <div class="social-auth">
+        <button class="social-btn" onclick="showToast('Google login coming soon')">
+          <span style="font-size:1.1rem">G</span> Continue with Google
+        </button>
+        <button class="social-btn" onclick="showToast('Apple login coming soon')">
+          <span style="font-size:1.1rem">🍎</span> Continue with Apple
+        </button>
+      </div>
+
+      <div class="auth-divider"><span>or sign in with email</span></div>
+
+      <!-- Email form -->
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-2)">
+            <label class="form-label" for="loginPassword" style="margin:0">Password</label>
+            <a href="#" style="font-size:var(--text-xs);color:var(--clr-accent)" onclick="showForgot()">Forgot password?</a>
+          </div>
+          <div style="position:relative">
+            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" onclick="togglePasswordVisibility('loginPassword',this)" style="position:absolute;right:1em;top:50%;translate:0 -50%;color:var(--clr-text-light);font-size:0.9rem">👁</button>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-3)">
+          <input type="checkbox" id="rememberMe" style="accent-color:var(--clr-accent);width:16px;height:16px">
+          <label for="rememberMe" style="font-size:var(--text-sm);color:var(--clr-text-muted)">Keep me signed in</label>
+        </div>
+        <button class="btn btn-primary" style="width:100%;padding:0.9em;font-size:var(--text-base)" onclick="handleLogin()">Sign In</button>
+      </div>
+
+      <p style="text-align:center;font-size:var(--text-sm);color:var(--clr-text-muted);margin-top:var(--sp-6)">
+        Don't have an account? <a href="register.html" style="color:var(--clr-accent);font-weight:var(--weight-semibold)">Create one →</a>
+      </p>
+
+      <!-- Forgot password (hidden) -->
+      <div id="forgotSection" style="display:none;margin-top:var(--sp-6);padding:var(--sp-5);background:var(--clr-bg-alt);border-radius:var(--radius-lg)">
+        <h3 style="font-size:var(--text-base);font-weight:var(--weight-semibold);margin-bottom:var(--sp-3)">Reset your password</h3>
+        <p style="font-size:var(--text-sm);color:var(--clr-text-muted);margin-bottom:var(--sp-3)">Enter your email and we'll send you a reset link.</p>
+        <div style="display:flex;gap:var(--sp-2)">
+          <input type="email" class="form-control" placeholder="you@example.com" style="flex:1">
+          <button class="btn btn-primary btn-sm" onclick="showToast('Reset link sent!','success')">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Visual Panel -->
+    <div class="auth-visual">
+      <img src="assets/images/banners/auth-bg.jpg" alt="">
+      <div class="auth-visual-overlay">
+        <blockquote style="color:white;font-family:var(--font-display);font-size:var(--text-2xl);font-weight:700;line-height:1.2;margin-bottom:var(--sp-4)">
+          "Fashion is the armor to survive the reality of everyday life."
+        </blockquote>
+        <p style="font-size:var(--text-sm);color:rgba(255,255,255,0.5)">— Bill Cunningham</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+  <script src="assets/js/main.js"></script>
+  <script>
+    function handleLogin() {
+      const email = document.getElementById('loginEmail').value;
+      const pw = document.getElementById('loginPassword').value;
+      if (!email || !pw) { showToast('Please fill in all fields', 'warning'); return; }
+      showToast('Signing in…');
+      setTimeout(() => window.location.href = 'account.html', 1000);
+    }
+    function showForgot() {
+      const el = document.getElementById('forgotSection');
+      el.style.display = el.style.display === 'none' ? '' : 'none';
+    }
+    function togglePasswordVisibility(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+      else { input.type = 'password'; btn.textContent = '👁'; }
+    }
+  </script>
+</body>
+</html>
